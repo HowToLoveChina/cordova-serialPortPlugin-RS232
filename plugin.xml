@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- 修改id -->
+<plugin xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-serialport"
+    version="1.0.0"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0">
+
+    <name>serialPortPlugin</name>
+    <js-module
+        name="serialPortPlugin"
+        src="www/serialPortPlugin.js">
+        <clobbers target="cordova.plugins.SerialPortPlugin" />
+    </js-module>
+    <platform name="android">
+        <config-file
+            parent="/*"
+            target="res/xml/config.xml">
+            <feature name="serialPortPlugin">
+                <param
+                    name="android-package"
+                    value="com.running.serialport.SerialPortPlugin" />
+            </feature>
+        </config-file>
+        <config-file
+            parent="/*"
+            target="AndroidManifest.xml"></config-file>
+
+		<!--src:java源文件的路径， target-dir:插件安装好后，源文件的位置，要和上面的包名对应 ,下面类似 -->
+        <source-file src="src/android/okhttp-3.2.0.jar" target-dir="libs"/>
+        <source-file src="src/android/okio-1.6.0.jar" target-dir="libs"/>
+
+        <source-file
+            src="src/android/SerialPortPlugin.java"
+            target-dir="src/com/running/serialport" />
+
+        <!-- 串口类 -->
+        <source-file
+            src="src/android/android_serialport_api/SerialPort.java"
+            target-dir="src/android_serialport_api" />
+        <!-- 其他类 -->
+        <source-file
+            src="src/android/entity/KqInfor.java"
+            target-dir="src/com/running/entity" />
+        <source-file
+            src="src/android/utils/ChangeTool.java"
+            target-dir="src/com/running/utils" />
+        <source-file
+            src="src/android/utils/SerialPortUtils.java"
+            target-dir="src/com/running/utils" />
+        <source-file
+            src="src/android/utils/SQLiteOpenHelperUtil.java"
+            target-dir="src/com/running/utils" />
+
+
+        <!-- jni类 -->
+        <source-file src="src/jni/Android.mk" target-dir="libs/armeabi-v7a/"/>
+        <source-file src="src/jni/Application.mk" target-dir="libs/armeabi-v7a/"/>
+        <source-file src="src/jni/gen_SerialPort_h.sh" target-dir="libs/armeabi-v7a/"/>
+        <source-file src="src/jni/SerialPort.c" target-dir="libs/armeabi-v7a/"/>
+        <source-file src="src/jni/SerialPort.h" target-dir="libs/armeabi-v7a/"/>
+
+        <source-file src="src/jniLibs/armeabi-v7a/libserial_port.so" target-dir="libs/armeabi-v7a/"/>
+        <source-file src="src/jniLibs/armeabi/libserial_port.so" target-dir="libs/armeabi/"/>
+        <source-file src="src/jniLibs/x86/libserial_port.so" target-dir="libs/x86/"/>
+
+
+
+    </platform>
+</plugin>
